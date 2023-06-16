@@ -1,0 +1,209 @@
+{
+    "zabbix_export": {
+        "version": "7.0",
+        "template_groups": [
+            {
+                "uuid": "7df96b18c230490a9a0a9e2307226338",
+                "name": "Templates"
+            }
+        ],
+        "templates": [
+            {
+                "uuid": "ace9490d916a46c2abd0b02869319837",
+                "template": "Template IPGeoLocation",
+                "name": "Template IPGeoLocation",
+                "description": "This template assigns the GeoLocation fields in inventory on hosts from ipgeolocation.io\n\nData collection runs every 24h.\n\nipgeolocation.io Developer account is free under 30K requests per month",
+                "groups": [
+                    {
+                        "name": "Templates"
+                    }
+                ],
+                "items": [
+                    {
+                        "uuid": "8f4d150db388406c8da913ed970cb180",
+                        "name": "City",
+                        "type": "DEPENDENT",
+                        "key": "geoloc.city",
+                        "delay": "0",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "inventory_link": "SITE_CITY",
+                        "preprocessing": [
+                            {
+                                "type": "JSONPATH",
+                                "parameters": [
+                                    "$.city"
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "web.page.regexp[https://api.ipgeolocation.io/ipgeo?apiKey={$APIKEY},,,.+\\{.+\\}]"
+                        },
+                        "tags": [
+                            {
+                                "tag": "GeoLoc"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "ea34d82b03bd4553be1e045b032cebb7",
+                        "name": "Country",
+                        "type": "DEPENDENT",
+                        "key": "geoloc.country",
+                        "delay": "0",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "inventory_link": "SITE_COUNTRY",
+                        "preprocessing": [
+                            {
+                                "type": "JSONPATH",
+                                "parameters": [
+                                    "$.country_name"
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "web.page.regexp[https://api.ipgeolocation.io/ipgeo?apiKey={$APIKEY},,,.+\\{.+\\}]"
+                        },
+                        "tags": [
+                            {
+                                "tag": "GeoLoc"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "46deff68de914cbf8cf6d61e8fc878a0",
+                        "name": "Latitude",
+                        "type": "DEPENDENT",
+                        "key": "geoloc.latitude",
+                        "delay": "0",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "inventory_link": "LOCATION_LAT",
+                        "preprocessing": [
+                            {
+                                "type": "JSONPATH",
+                                "parameters": [
+                                    "$.latitude"
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "web.page.regexp[https://api.ipgeolocation.io/ipgeo?apiKey={$APIKEY},,,.+\\{.+\\}]"
+                        },
+                        "tags": [
+                            {
+                                "tag": "GeoLoc"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "e5c36d717609417688b59b97677985f4",
+                        "name": "Longitude",
+                        "type": "DEPENDENT",
+                        "key": "geoloc.longitude",
+                        "delay": "0",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "inventory_link": "LOCATION_LON",
+                        "preprocessing": [
+                            {
+                                "type": "JSONPATH",
+                                "parameters": [
+                                    "$.longitude"
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "web.page.regexp[https://api.ipgeolocation.io/ipgeo?apiKey={$APIKEY},,,.+\\{.+\\}]"
+                        },
+                        "tags": [
+                            {
+                                "tag": "GeoLoc"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "8ca7124ad6934af798e7229498c402c5",
+                        "name": "State / Province",
+                        "type": "DEPENDENT",
+                        "key": "geoloc.stateprov",
+                        "delay": "0",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "inventory_link": "SITE_STATE",
+                        "preprocessing": [
+                            {
+                                "type": "JSONPATH",
+                                "parameters": [
+                                    "$.state_prov"
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "web.page.regexp[https://api.ipgeolocation.io/ipgeo?apiKey={$APIKEY},,,.+\\{.+\\}]"
+                        },
+                        "tags": [
+                            {
+                                "tag": "GeoLoc"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "e450fa3b0ead4f9a95c8e3b8cec238da",
+                        "name": "Zipcode",
+                        "type": "DEPENDENT",
+                        "key": "geoloc.zip",
+                        "delay": "0",
+                        "inventory_link": "SITE_ZIP",
+                        "preprocessing": [
+                            {
+                                "type": "JSONPATH",
+                                "parameters": [
+                                    "$.zipcode"
+                                ]
+                            }
+                        ],
+                        "master_item": {
+                            "key": "web.page.regexp[https://api.ipgeolocation.io/ipgeo?apiKey={$APIKEY},,,.+\\{.+\\}]"
+                        },
+                        "tags": [
+                            {
+                                "tag": "GeoLoc"
+                            }
+                        ]
+                    },
+                    {
+                        "uuid": "e04e347030324941afa5d5f0ed244dbe",
+                        "name": "GeoLocation",
+                        "key": "web.page.regexp[https://api.ipgeolocation.io/ipgeo?apiKey={$APIKEY},,,.+\\{.+\\}]",
+                        "delay": "24h",
+                        "trends": "0",
+                        "value_type": "TEXT",
+                        "preprocessing": [
+                            {
+                                "type": "REGEX",
+                                "parameters": [
+                                    ".+\\{.+\\}",
+                                    "\\0"
+                                ]
+                            }
+                        ],
+                        "tags": [
+                            {
+                                "tag": "GeoLoc"
+                            }
+                        ]
+                    }
+                ],
+                "macros": [
+                    {
+                        "macro": "{$APIKEY}",
+                        "value": "ENTER YOUR API KEY",
+                        "description": "Your ipgeolocation.io API key"
+                    }
+                ]
+            }
+        ]
+    }
+}
